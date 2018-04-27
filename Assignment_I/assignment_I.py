@@ -22,9 +22,18 @@ w = [0, 0, 0]
 # print temp
 
 def Learing(W, H, E, I, K1, K2, w, temp): # define a function to learn the value of w
-    for y in range(H):
-        for x in range(W):
+    m = [K1, K2, I]
+    a = []
+    e = []
+    epoch = 1
+    for x in range(W*H):
+        a[x] = w[x]*m[x]
+        e[x] = E[x] - a[x]
+        w[x+1] = w[x] + a * e[x] * m[x]
+    epoch += 1
+
+
 
 
 # e = w1k1 + w2k2 + w3i
-Learing(W, H, E, I, K1, K2, w, temp)
+Learing(W, H, E, I, K1, K2, w, temp,)
