@@ -26,14 +26,16 @@ def Learing(W, H, E, I, K1, K2, w, temp): # define a function to learn the value
     a = []
     e = []
     epoch = 1
-    for x in range(W*H):
-        a[x] = w[x]*m[x]
-        e[x] = E[x] - a[x]
-        w[x+1] = w[x] + a * e[x] * m[x]
-    epoch += 1
-
-
+    y = 0
+    while (epoch==1 | epoch<(W*H) & np.abs(w[y]-w[y-1])):
+        for x in range(W*H):
+            a[x] = np.dot(w[x], m[x])
+            e[x] = E[x] - a[x]
+            w[x + 1] = w[x] + a * e[x] * m[x]
+        epoch += 1
+    y += 1
+    return  w
 
 
 # e = w1k1 + w2k2 + w3i
-Learing(W, H, E, I, K1, K2, w, temp,)
+print(Learing(W, H, E, I, K1, K2, w, temp))
