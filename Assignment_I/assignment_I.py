@@ -25,13 +25,14 @@ def Learing(W, H, E, I, K1, K2, w, temp): # define a function to learn the value
     m = [K1, K2, I]
     a = []
     e = []
+    apha = 0.000001
     epoch = 1
     y = 0
-    while (epoch==1 | epoch<(W*H) & np.abs(w[y]-w[y-1])):
+    while (epoch==1 or epoch<(W*H) and np.abs(w[y]-w[y-1])>0):
         for x in range(W*H):
             a[x] = np.dot(w[x], m[x])
             e[x] = E[x] - a[x]
-            w[x + 1] = w[x] + a * e[x] * m[x]
+            w[x + 1] = w[x] + np.dot(apha, e[x], m[x])
         epoch += 1
     y += 1
     return  w
