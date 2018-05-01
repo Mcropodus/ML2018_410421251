@@ -33,11 +33,11 @@ def Learing(E, I1, K1, K2, Q): # define a function to learn the value of w
     w = [0, 0, 0]
     # a = []
     # e = []
-    ans = []
     apha = 0.00001
-    epoch = 1
+    #epoch = 1
     W = 400
     H = 300
+    ans = np.zeros(H*W)
     #y = 0
     #while (epoch==1 or epoch<(W*H) and np.abs(w[y]-w[y-1])>0):
     for x in range(W*H):
@@ -46,15 +46,19 @@ def Learing(E, I1, K1, K2, Q): # define a function to learn the value of w
         w[0] = w[0] + apha * e * K1[x]
         w[1] = w[1] + apha * e * K2[x]
         w[2] = w[2] + apha * e * I1[x]
-    epoch += 1
+    #epoch += 1
     #y += 1
+
     for x in range(W*H):
-        ans[x] = (Q[x]-K1[x]*w[0]-K2[x]*w[1])/w[0]
+        ans[x] = (Q[x] - K1[x]*w[0] - K2[x]*w[1]) / w[2]
+    #print ans
+    ans = ans.reshape((300, 400))
     print ans
-    #return w
 
-
-
+    Final_img = Image.fromarray(ans)
+    Image._show(Final_img)
+    Final_img.save('Final_img.jpg')
+    return w
 
 # e = w1k1 + w2k2 + w3i
 print(Learing(E, I1, K1, K2, Q))
