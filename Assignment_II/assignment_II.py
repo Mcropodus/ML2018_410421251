@@ -3,6 +3,11 @@ import numpy as np
 from sklearn.datasets import fetch_mldata
 import matplotlib.pyplot as plt
 
+digits = datasets.load_digits() #load the data
+
+plt.figure(1, figsize=(3, 3))
+plt.imshow(digits.images[-1], cmap=plt.cm.gray_r, interpolation='nearest')
+plt.show()
 
 mnist = fetch_mldata('MNIST original')
 # digits = datasets.load_digits()
