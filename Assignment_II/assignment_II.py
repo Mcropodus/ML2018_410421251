@@ -1,17 +1,17 @@
-import numpy as np
-# from sklearn import datasets
-from sklearn.datasets import fetch_mldata
 import matplotlib.pyplot as plt
+# Import datasets, classifiers and performance metrics
+from sklearn import datasets, svm, metrics
 
-digits = datasets.load_digits() #load the data
+# The digits dataset
+digits = datasets.load_digits()
 
-plt.figure(1, figsize=(3, 3))
-plt.imshow(digits.images[-1], cmap=plt.cm.gray_r, interpolation='nearest')
-plt.show()
 
-mnist = fetch_mldata('MNIST original')
-# digits = datasets.load_digits()
-# plt.figure(1, figsize=(3, 3))
-# plt.imshow(digits.images[-1], cmap=plt.cm.gray_r, interpolation='nearest')
-# plt.show()
+images_and_labels = list(zip(digits.images, digits.target))
+for index, (image, label) in enumerate(images_and_labels[:4]):
+    plt.subplot(2, 4, index + 1)
+    plt.axis('off')
+    plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+    plt.title('Training: %i' % label)
+
+
 
