@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-# Import datasets, classifiers and performance metrics
 from sklearn import datasets, svm, metrics
 import scipy
 
@@ -14,5 +13,16 @@ for index, (image, label) in enumerate(images_and_labels[:4]):
     plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
     plt.title('Training: %i' % label)
 
+sample = len(digits.images)
+data = digits.images.reshape((sample, -1))
 
+classifier = svm.SVC(gamma=0.001)
+classifier.fit(data[:sample // 2], digits.target[:sample // 2])
+
+expected = digits.target[sample // 2:]
+predicted = classifier.predict(data[sample // 2:])
+
+print("Report for classifier %s:\n%s\n"
+      % (classifier, metrics.classification_report(expected, predicted)))
+print("Confusion matrix:\n%s" % metrics.confusion_matrix(expected, predicted))
 
