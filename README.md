@@ -52,7 +52,7 @@ a存放三張圖片(key1, key2, I)的第x個象素乘上各自對應的w值<br>
 
 遇到的問題：<br>
 1. 步驟中應該需要利用一個while確定學習的過程中不會因為始終學不到w值而形成無窮迴圈，但是我加上while後程式卻出現error,所以先mark起來<br>
-2. 想要將ans圖片存為jpg或png檔案，但是一直無法正確存檔<br>
+2. 想要將ans圖片存為jpg或png檔案，但是一直無法正確存檔<br><br><br>
 
 
 Assignment II
