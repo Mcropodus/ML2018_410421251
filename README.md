@@ -52,5 +52,49 @@ a存放三張圖片(key1, key2, I)的第x個象素乘上各自對應的w值<br>
 
 遇到的問題：<br>
 1. 步驟中應該需要利用一個while確定學習的過程中不會因為始終學不到w值而形成無窮迴圈，但是我加上while後程式卻出現error,所以先mark起來<br>
-2. 想要將ans圖片存為jpg或png檔案，但是一直無法正確存檔<br>
+2. 想要將ans圖片存為jpg或png檔案，但是一直無法正確存檔<br><br><br>
+
+
+Assignment II
+
+作業：利用sklearn進行手寫辨識<br>
+環境：Python<br>
+套件：sklearn, matplotlib, scipy, numpy<br>
+
+
+此次作業之database都可以在sklearn中找到，因此可以直接使用datasets.load_digits()將資料抓出來。<br>
+利用以下程式碼進行訓練<br>
+images_and_labels = list(zip(digits.images, digits.target))<br>
+for index, (image, label) in enumerate(images_and_labels[:4]):<br>
+    plt.subplot(2, 4, index + 1)<br>
+    plt.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')<br>
+    plt.title('Training: %i' % label)<br>
+
+訓練時，會一併儲存每一張圖片的數字是甚麼，方便讓電腦學習後面的數據，實際數字存在digits.target變數中<br><br>
+
+用reshape將影像打平成64x1的矩陣。<br>
+然後用classifier = svm.SVC(gamma=0.001)來產生一個SVC分類器。<br>
+將一半的資料送入分類器訓練classifier.fit。<br>
+其中SVC(gamma=0.001)是在設定$$\gamma$$ 這個值要大於零。<br>
+利用後半部份的資料來測試訓練完成之SVC分類機predict(data[n_samples / 2:])並將預測結果存入predicted。<br>
+原本的正確數字存在expected，用來做準確度統計。<br><br>
+
+使用sklearn的metrics.confusion_matrix)可以列出下面矩陣。<br>
+![Alt text](https://i.imgur.com/r9G0MRi.jpg)<br>
+此矩陣對角線左上方第一個數字 87，代表實際為0且預測為0的總數有87個，但誤判為4的資料個數為1個,依此類推。<br>
+可以利用numpy來產生圖表觀察誤判的程度：<br>
+![Alt text](https://i.imgur.com/hPxyIwR.jpg)<br>
+比較明顯的例子可以看到學習過程中，實際為三的數字曾誤判為5.7.8，這個數據也反映在矩陣上。<br><br>
+
+報表：<br>
+![Alt text](https://i.imgur.com/Khvmydm.jpg)<br>
+報表代表著實際為手寫數字的總數。例如實際為0的數字共有88個，依此類推。<br>
+
+訓練後，我們可以將影像再丟進程式，測試學習結果：<br>
+![Alt text](https://i.imgur.com/tnvukpW.jpg)<br>
+上列為訓練的數字影像，下列為訓練完的測試數字影像及結果。<br><br>
+
+問題：<br>
+此次作業，因為手寫辨識的發展已經很成熟，所以有很多資源可以參考，寫起來和理解起來也比較容易。<br>
+唯一遇到的問題是一開始不知道sklrean需要用到scipy的套件，所以程式一直error，載入scipy後就沒什麼大問題了。
 
