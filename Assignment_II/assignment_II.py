@@ -35,3 +35,19 @@ for index, (image, prediction) in enumerate(images_and_predictions[:4]):
 
 plt.show()
 
+#miss
+def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
+    import numpy as np
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(digits.target_names))
+    plt.xticks(tick_marks, digits.target_names, rotation=45)
+    plt.yticks(tick_marks, digits.target_names)
+    plt.tight_layout()
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+
+plt.figure()
+plot_confusion_matrix(metrics.confusion_matrix(expected, predicted))
+plt.show()
